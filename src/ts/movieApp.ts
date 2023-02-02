@@ -7,7 +7,7 @@ export const init = () => {
   let form = document.getElementById("searchForm") as HTMLFormElement;
   form.addEventListener("submit", (e: SubmitEvent) => {
     e.preventDefault();
-    handleSubmit();
+   exports.handleSubmit();
   });
 };
 
@@ -22,7 +22,6 @@ export async function handleSubmit() {
 
   try {
     movies = await getData(searchText);
-
     if (movies.length > 0) {
       exports.createHtml(movies, container);
     } else {
