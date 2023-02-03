@@ -3,12 +3,8 @@
  */
 
 import * as movieApp from "./../movieApp"
-//import { init, handleSubmit, createHtml, displayNoResult} from "../movieApp";
-//port { toBindingIdentifierName, valueToNode } from "@babel/types";
-//import { resolve } from "path";
 import { movies } from "../services/__mocks__/movieservice";
-//import { getData } from "../services/__mocks__/movieservices";
-//import { IMovie } from "../models/Movie";
+
 
 jest.mock("./../services/movieservice.ts");
 
@@ -54,7 +50,7 @@ test("Should test createHtml to whrite movies", () => {
 });
 
 describe("Tests for handleSubmit", () => {
-   test("Should test handleSubmit known search", () => {
+   test ("Should test handleSubmit known search", async () => {
         //arrage
 
         document.body.innerHTML = `
@@ -69,13 +65,14 @@ describe("Tests for handleSubmit", () => {
         (document.querySelector("#searchText") as HTMLInputElement).value = "Dödens grotta";
 
         //act
-        movieApp.handleSubmit();
+        await movieApp.handleSubmit();
 
         //assert
         expect(spy).toBeCalled();
+        spy.mockRestore();
     });
 
-    test("Should test handleSubmit unknown search", () => {
+    test("Should test handleSubmit unknown search", async () => {
         //arrage
         document.body.innerHTML = `
         <form id="searchForm">
@@ -89,13 +86,14 @@ describe("Tests for handleSubmit", () => {
         (document.querySelector("#searchText") as HTMLInputElement).value = "Bondens liv";
 
         //act
-        movieApp.handleSubmit();
+        await movieApp.handleSubmit();
 
         //assert
         expect(spy).toBeCalled();
+        spy.mockRestore();
     });
 
-    test("Should test handleSubmit without searchword", () => {
+    test("Should test handleSubmit without searchword", async () => {
         //arrage
         document.body.innerHTML = `
         <form id="searchForm">
@@ -109,10 +107,11 @@ describe("Tests for handleSubmit", () => {
         (document.querySelector("#searchText") as HTMLInputElement).value = "";
 
         //act
-        movieApp.handleSubmit();
+        await movieApp.handleSubmit();
 
         //assert
         expect(spy).toBeCalled();
+        spy.mockRestore();
     });
 });
 
