@@ -1,8 +1,5 @@
-import { IOmdbResponse } from "../../models/IOmdbResponse";
-import axios from "axios";
 import { IMovie } from "../../models/Movie";
-import { resolve } from "path";
-import { title } from "process";
+
 
 export let movies: IMovie[] = [
     {Title:"Dödens grotta", imdbID:"4", Type:"skräck", Poster:"img", Year:"1989"},
@@ -12,9 +9,7 @@ export let movies: IMovie[] = [
 ];
 
 export const getData = async (searchText: string): Promise<IMovie[]> => {
-    console.log("Hello");
     return new Promise ((resolve) => {
-        console.log(searchText);
         if (searchText != "") {
             resolve(movies.filter((p) => p.Title === searchText));
         } else {

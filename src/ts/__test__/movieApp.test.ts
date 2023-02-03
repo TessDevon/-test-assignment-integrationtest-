@@ -5,7 +5,6 @@
 import * as movieApp from "./../movieApp"
 import { movies } from "../services/__mocks__/movieservice";
 
-
 jest.mock("./../services/movieservice.ts");
 
 beforeEach(() => {
@@ -33,9 +32,9 @@ test("should check if handleSubmit is checked", () =>{
     spy.mockRestore()
 });
 
-test("Should test createHtml to whrite movies", () => {
+test("should test createHtml", () => {
     //arrage
-   document.body.innerHTML = `
+    document.body.innerHTML = `
     <div id="movie-container">
     </div>
     `;
@@ -50,9 +49,8 @@ test("Should test createHtml to whrite movies", () => {
 });
 
 describe("Tests for handleSubmit", () => {
-   test ("Should test handleSubmit known search", async () => {
+    test ("should test handleSubmit known search", async () => {
         //arrage
-
         document.body.innerHTML = `
         <form id="searchForm">
             <input type="text" id="searchText" placeholder="Skriv titel här" />
@@ -72,7 +70,7 @@ describe("Tests for handleSubmit", () => {
         spy.mockRestore();
     });
 
-    test("Should test handleSubmit unknown search", async () => {
+    test("should test handleSubmit unknown search", async () => {
         //arrage
         document.body.innerHTML = `
         <form id="searchForm">
@@ -93,7 +91,7 @@ describe("Tests for handleSubmit", () => {
         spy.mockRestore();
     });
 
-    test("Should test handleSubmit without searchword", async () => {
+    test("should test handleSubmit without searchword", async () => {
         //arrage
         document.body.innerHTML = `
         <form id="searchForm">
@@ -115,7 +113,7 @@ describe("Tests for handleSubmit", () => {
     });
 });
 
-test("Should test displayNoResult whites", () => {
+test("should test displayNoResult", () => {
     //arrage
     document.body.innerHTML = `
     <div id="movie-container">
@@ -127,7 +125,6 @@ test("Should test displayNoResult whites", () => {
     movieApp.displayNoResult(container);
 
     //assert
-    //(document.querySelector('#searchform') as HTMLFormElement)?.submit();
     expect(container.children.length).toBe(1);
     expect(container.children[0].innerHTML).toBe("Inga sökresultat att visa");
 });
