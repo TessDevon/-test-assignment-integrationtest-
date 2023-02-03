@@ -12,9 +12,11 @@ export let movies: IMovie[] = [
 ];
 
 export const getData = async (searchText: string): Promise<IMovie[]> => {
+    console.log("Hello");
     return new Promise ((resolve) => {
+        console.log(searchText);
         if (searchText != "") {
-            resolve(movies.filter((p) => p.Title === searchText));
+            resolve(movies/*.filter((p) => p.Title === searchText)*/);
         } else {
             resolve([]);
         }    

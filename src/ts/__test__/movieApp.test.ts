@@ -4,12 +4,17 @@
 
 import * as movieApp from "./../movieApp"
 //import { init, handleSubmit, createHtml, displayNoResult} from "../movieApp";
-import { toBindingIdentifierName, valueToNode } from "@babel/types";
-import { resolve } from "path";
-import { movies } from "../services/__mocks__/movieservices";
-import { getData } from "../services/__mocks__/movieservices";
+//port { toBindingIdentifierName, valueToNode } from "@babel/types";
+//import { resolve } from "path";
+import { movies } from "../services/__mocks__/movieservice";
+//import { getData } from "../services/__mocks__/movieservices";
+//import { IMovie } from "../models/Movie";
 
 jest.mock("./../services/movieservice.ts");
+
+beforeEach(() => {
+    document.body.innerHTML = "";
+});
 
 test("should check if handleSubmit is checked", () =>{
     //arrage
@@ -32,17 +37,33 @@ test("should check if handleSubmit is checked", () =>{
     spy.mockRestore()
 });
 
+test("Should test createHtml to whrite movies", () => {
+    //arrage
+   document.body.innerHTML = `
+    <div id="movie-container">
+    </div>
+    `;
+    let container: HTMLDivElement = document.getElementById("movie-container") as HTMLDivElement;
+
+    //act
+    movieApp.createHtml(movies, container);
+
+    //assert
+    expect(container.children.length).toBe(4);
+    expect(container.children[0].children[0].innerHTML).toBe("Dödens grotta");
+});
+
 describe("Tests for handleSubmit", () => {
    test("Should test handleSubmit known search", () => {
         //arrage
 
-    document.body.innerHTML = `
-    <form id="searchForm">
-        <input type="text" id="searchText" placeholder="Skriv titel här" />
-        <button type="submit" id="search">Sök</button>
-    </form>
-    <div id="movie-container"></div>
-    `;
+        document.body.innerHTML = `
+        <form id="searchForm">
+            <input type="text" id="searchText" placeholder="Skriv titel här" />
+            <button type="submit" id="search">Sök</button>
+        </form>
+        <div id="movie-container"></div>
+        `;
 
         let spy = jest.spyOn(movieApp, "createHtml").mockReturnValue(); 
         (document.querySelector("#searchText") as HTMLInputElement).value = "Dödens grotta";
@@ -93,22 +114,6 @@ describe("Tests for handleSubmit", () => {
         //assert
         expect(spy).toBeCalled();
     });
-});
-
-test("Should test createHtml to whrite movies", () => {
-    //arrage
-   document.body.innerHTML = `
-    <div id="movie-container">
-    </div>
-    `;
-    let container: HTMLDivElement = document.getElementById("movie-container") as HTMLDivElement;
-
-    //act
-    movieApp.createHtml(movies, container);
-
-    //assert
-    expect(container.children.length).toBe(4);
-    expect(container.children[0].children[0].innerHTML).toBe("Dödens grotta");
 });
 
 test("Should test displayNoResult whites", () => {

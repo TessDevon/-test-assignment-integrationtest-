@@ -1,9 +1,9 @@
 /**
- * @jest-environment jsdom 
+ * @jest-environment jsdom
  */
 
 import { getData } from './../services/movieservice';
-import { movies } from '../services/__mocks__/movieservices'; 
+import { movies } from '../services/__mocks__/movieservice'; 
 
 jest.mock("axios", () => ({
     get: async (url:string) => {
